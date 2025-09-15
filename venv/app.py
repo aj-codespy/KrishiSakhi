@@ -1,15 +1,16 @@
 # app.py
 import streamlit as st
 import os
-from config import GEMINI_API_KEY, SUPPORTED_LANGUAGES
-from utils.rag_utils import load_faiss_index
+import faiss
+import numpy as np
+import google.generativeai as genai
+
+# Corrected Imports
+import config
+from utils.rag_utils import load_faiss_index, embed_texts
 from utils.ml_utils import compute_predictions
 from utils.chatbot_utils import process_chat_query
-from utils.api_utils import fetch_weather, fetch_gov_info
-
-import streamlit as st
-import os
-from utils.rag_utils import load_faiss_index # Make sure this import exists
+from utils.api_utils import fetch_weather, fetch_gov_info # Make sure this import exists
 
 # Define the paths
 VECTOR_DB_PATH = os.path.join("vector_db", "faiss_index.index")
