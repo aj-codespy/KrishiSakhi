@@ -13,8 +13,8 @@ MODEL_NAME = "gemini-2.0-flash"
 EMBEDDING_MODEL = "models/embedding-001"
 
 # --- File Paths ---
-VECTOR_DB_PATH = "vector_db/faiss_index.index"
-DOCS_PATH = "vector_db/docs.txt"
+VECTOR_DB_PATH = os.path.join("vector_db", "faiss_index.index")
+DOCS_PATH = os.path.join("vector_db", "docs.txt")"
 
 # --- Application Settings ---
 # Dictionary of supported languages. Key: language code, Value: display name.
