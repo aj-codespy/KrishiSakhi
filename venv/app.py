@@ -7,6 +7,42 @@ from utils.ml_utils import compute_predictions
 from utils.chatbot_utils import process_chat_query
 from utils.api_utils import fetch_weather, fetch_gov_info
 
+import streamlit as st
+import os
+from utils.rag_utils import load_faiss_index # Make sure this import exists
+
+# Define the paths
+VECTOR_DB_PATH = os.path.join("vector_db", "faiss_index.index")
+DOCS_PATH = os.path.join("vector_db", "docs.txt")
+
+
+# --- Load Vector DB ---
+# This is loaded once and cached for performance
+@st.cache_resource
+def load_resources():
+    """
+    Checks for the existence of the vector DB files and loads them.
+    Returns the FAISS index and the documents, or None if not found.
+    """
+    print("[APP] Attempting to load resources (FAISS index and docs)...")
+    
+    # Safety check to ensure files exist before trying to load them
+    if not os.path.exists(VECTOR_DB_PATH) or not os.path.exists(DOCS_PATH):
+        print(f"❌ [APP] Error: Vector DB files not found at expected paths.")
+        return None, None
+    
+    # Load the files using the helper function
+    index, docs = load_faiss_index(VECTOR_DB_PATH, DOCS_PATH)
+    print("✅ [APP] Resources loaded successfully.")
+    return index, docs
+
+# --- Execute the loading function ---
+# This line runs the function and stores the result in variables for the app to use.
+faiss_index, docs = load_resources()
+
+# --- Main Application Logic Starts Below ---
+# (e.g., your st.title(), main(), etc.)
+
 # --- Page Configuration ---
 st.set_page_config(page_title="Krishi Sakhi", page_icon="🌱", layout="wide")
 
