@@ -1,7 +1,7 @@
 # app.py
 import streamlit as st
 import os
-from config import GEMINI_API_KEY, VECTOR_DB_PATH, DOCS_PATH, SUPPORTED_LANGUAGES
+from config import GEMINI_API_KEY, SUPPORTED_LANGUAGES
 from utils.rag_utils import load_faiss_index
 from utils.ml_utils import compute_predictions
 from utils.chatbot_utils import process_chat_query
