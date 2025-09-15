@@ -1,11 +1,13 @@
 # build_vector_db.py
+
 import os
 import faiss
 import numpy as np
 import google.generativeai as genai
-from config import GEMINI_API_KEY, EMBEDDING_MODEL, VECTOR_DB_PATH, DOCS_PATH
+
+# Corrected Imports
+import config
 from utils.rag_utils import embed_texts
-import traceback
 
 def run_build():
     """
